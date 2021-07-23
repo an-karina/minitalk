@@ -1,5 +1,5 @@
 # minitalk
-You must create a communication program in the form of a client and server.
+##You must create a communication program in the form of a client and server.
 - The server must be launched first, and after being launched it must display its PID.
 - The client will take as parameters:
 - The server PID.
