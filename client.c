@@ -2,21 +2,19 @@
 #include <stdlib.h>
 int	send_sym(int pid, char sym)
 {
-	uint8_t mask;
+	uint8_t	mask;
 
-	mask = 0b000001;
-	printf("%c\n", sym);
+	mask = 0b00000001;
 	while (mask)
 	{
 		if (mask & sym)
 		{
-
-			if (kill(pid, SIGUSR1) != 0)//if this bit is 1
+			if (kill(pid, SIGUSR1) != 0)
 				return (write(2, "error with kill()\n", 18), -1);
 		}
 		else
 		{
-			if (kill(pid, SIGUSR2) != 0)//if this bit is 0
+			if (kill(pid, SIGUSR2) != 0)
 				return (write(2, "error with kill()\n", 18), -1);
 		}
 		mask = mask << 1;
@@ -34,14 +32,14 @@ void	send_msg(int pid, char **str)
 			send_sym(pid, **str);
 			++(*str);
 		}
-		exit(1);
+		send_sym(pid, '\n');
 		++str;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int pid;
+	int	pid;
 
 	if (argc != 3)
 	{
